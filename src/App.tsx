@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {Utils} from "./Utils.ts";
 
 function App() {
   const [count, setCount] = useState(0)
+
+    useEffect(() => {
+        const date = Utils.formatDate('20-10-2020')
+        console.log(date)
+    }, []);
 
   return (
     <>
