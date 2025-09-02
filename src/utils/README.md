@@ -85,3 +85,30 @@ percent → Tính % (thường dùng trong UI).
 
 export const percent = (value: number, total: number) =>
 total === 0 ? 0 : (value / total) * 100;
+
+
+utils/
+├── text.ts
+├── number.ts
+├── date.ts
+├── array.ts
+├── object.ts
+├── validation.ts
+├── browser.ts
+├── storage.ts
+├── async.ts
+└── index.ts
+
+
+| Nhóm              | Ví dụ hàm                                                                             | Mục đích                          |
+| ----------------- | ------------------------------------------------------------------------------------- | --------------------------------- |
+| **Text/String**   | `capitalize`, `slugify`, `truncate`, `removeAccents`, `camelToSnake`, `highlightText` | Xử lý chuỗi, format tên, slug URL |
+| **Number/Math**   | `clamp`, `roundTo`, `randomInt`, `percentage`, `formatNumber`, `isEven`               | Xử lý số, toán học cơ bản         |
+| **Date/Time**     | `formatDate`, `isToday`, `addDays`, `diffDays`, `toISO`, `startOfWeek`                | Format & so sánh ngày giờ         |
+| **Array/List**    | `unique`, `flatten`, `chunk`, `shuffle`, `groupBy`, `removeDuplicates`                | Xử lý danh sách                   |
+| **Object**        | `deepClone`, `isEmpty`, `merge`, `pick`, `omit`, `deepGet`                            | Làm việc với object phức tạp      |
+| **Validation**    | `isEmail`, `isPhone`, `isUrl`, `isUUID`, `isNumeric`                                  | Validate input                    |
+| **Browser/DOM**   | `copyToClipboard`, `scrollToTop`, `downloadFile`, `getQueryParam`                     | Tương tác trình duyệt             |
+| **Storage**       | `getLocalStorage`, `setLocalStorage`, `removeLocalStorage`, `getSessionStorage`       | Wrapper cho local/session storage |
+| **Promise/Async** | `sleep`, `retry`, `timeout`, `debounceFn`, `throttleFn`                               | Hỗ trợ bất đồng bộ                |
+| **Misc/Other**    | `uuid`, `noop`, `range`, `hashString`, `safeJSONParse`                                | Tiện ích chung                    |
