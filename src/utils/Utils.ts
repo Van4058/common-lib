@@ -151,7 +151,20 @@ export const TextUtils = {
         return text.trim().length === 0;
     }
 }
+// utils/cookie.ts
 
-export const DateUtils = {
-    
+export function setCookie(name: string, value: string, days: number) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+}
+
+export function getCookie(name: string) {
+    const matches = document.cookie.match(
+        new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)")
+    );
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+export function removeCookie(name: string) {
+    setCookie(name, "", -1);
 }

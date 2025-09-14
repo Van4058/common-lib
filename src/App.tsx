@@ -1,20 +1,14 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
-import {Utils} from "./Utils.ts";
 import {Button} from "./components/button/Button.tsx";
+import {MasterLayout} from "./layouts/MasterLayout.tsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
-    useEffect(() => {
-        const date = Utils.formatDate('20-10-2020')
-        console.log(date)
-    }, []);
-
   return (
-    <>
+    <MasterLayout>
       <div>
           <Button>fsdsd</Button>
         <a href="https://vite.dev" target="_blank">
@@ -36,7 +30,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </MasterLayout>
   )
 }
 
