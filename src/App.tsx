@@ -12,7 +12,7 @@ function App() {
     return (
         <MasterLayout>
             <div>
-                <Button onClick={() => message.}>message</Button>
+                <Button onClick={() => message.success({content: 'heheheheheh'})}>message</Button>
                 <Button>modal</Button>
                 <Button>notification</Button>
                 <a href="https://vite.dev" target="_blank">
