@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import {Button} from "./components/button/Button.tsx";
@@ -10,8 +10,54 @@ function App() {
     const [count, setCount] = useState(0)
     const {message, notification, modal} = useFeedback();
 
+
+    // Hoặc dùng react-route có 1 hook để detect event này
+
+    useEffect(() => {
+        const onBeforeClose = (ev) => {
+            ev.preventDefault();
+            ev.returnValue = '';
+        }
+
+        window.addEventListener("beforeunload", onBeforeClose);
+
+        return () => {
+            window.removeEventListener("beforeunload", onBeforeClose)
+        }
+
+    }, [])
+
+    // useEffect(() => {
+    //     if (vm.isLoading !== E_SendingStatus.loading) {
+    //         const data: _T_TableDataType[] = vm.items.slice((page - 1) * limit, page * limit).map((item, index) => ({
+    //             key: index,
+    //             name: item.name,
+    //             describe: item.describe ?? "",
+    //             type: item.type ?? "",
+    //             state: item.state ?? E_DriveBoxResState.sending,
+    //             user: item.user?.name ?? "",
+    //             box: item.box?.name ?? "",
+    //             createdAt: item.createdAt != null ? item.createdAtFormatted() : '',
+    //             server: item._sv,
+    //             model: item
+    //         }))
+    //
+    //         setDataSource(data)
+    //     }
+    //
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [vm.items])
+
     return (
         <MasterLayout>
+            <div style={{background: "#000", width: "500px", height: "500px"}} onClick={() => {
+                console.log('parent')}}>
+                <div style={{background: "white", width: "200px", height: "200px"}} onClick={(event) => {
+                    event.stopPropagation()
+                    console.log('child')}}>
+
+                </div>
+            </div>
             {/*<div>*/}
             {/*    <Button onClick={() => message.success({content: 'heheheheheh'})}>message</Button>*/}
             {/*    <Button>modal</Button>*/}
