@@ -1,31 +1,30 @@
-import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import {Button} from "./components/button/Button.tsx";
+import React, {useEffect, useState} from 'react'
 import {MasterLayout} from "./layouts/MasterLayout.tsx";
 import {useFeedback} from "./contexts/FeedbackContext.tsx";
 import {Select} from "antd";
+import {Navbar} from "./components/menu/Menu.tsx";
 
 function App() {
     const [count, setCount] = useState(0)
     const {message, notification, modal} = useFeedback();
+    const [open, setOpen] = useState(false);
 
 
     // Hoặc dùng react-route có 1 hook để detect event này
 
-    useEffect(() => {
-        const onBeforeClose = (ev) => {
-            ev.preventDefault();
-            ev.returnValue = '';
-        }
-
-        window.addEventListener("beforeunload", onBeforeClose);
-
-        return () => {
-            window.removeEventListener("beforeunload", onBeforeClose)
-        }
-
-    }, [])
+    // useEffect(() => {
+    //     const onBeforeClose = (ev) => {
+    //         ev.preventDefault();
+    //         ev.returnValue = '';
+    //     }
+    //
+    //     window.addEventListener("beforeunload", onBeforeClose);
+    //
+    //     return () => {
+    //         window.removeEventListener("beforeunload", onBeforeClose)
+    //     }
+    //
+    // }, [])
 
     // useEffect(() => {
     //     if (vm.isLoading !== E_SendingStatus.loading) {
@@ -50,14 +49,16 @@ function App() {
 
     return (
         <MasterLayout>
-            <div style={{background: "#000", width: "500px", height: "500px"}} onClick={() => {
-                console.log('parent')}}>
-                <div style={{background: "white", width: "200px", height: "200px"}} onClick={(event) => {
-                    event.stopPropagation()
-                    console.log('child')}}>
 
-                </div>
-            </div>
+            <Navbar />
+            {/*<div style={{background: "#000", width: "500px", height: "500px"}} onClick={() => {*/}
+            {/*    console.log('parent')}}>*/}
+            {/*    <div style={{background: "white", width: "200px", height: "200px"}} onClick={(event) => {*/}
+            {/*        event.stopPropagation()*/}
+            {/*        console.log('child')}}>*/}
+
+            {/*    </div>*/}
+            {/*</div>*/}
             {/*<div>*/}
             {/*    <Button onClick={() => message.success({content: 'heheheheheh'})}>message</Button>*/}
             {/*    <Button>modal</Button>*/}
