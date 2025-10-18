@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {MasterLayout} from "./layouts/MasterLayout.tsx";
 import {useFeedback} from "./contexts/FeedbackContext.tsx";
-import {Select} from "antd";
+import {Modal, Select} from "antd";
 import {Navbar} from "./components/menu/Menu.tsx";
+import {CustomModal} from "./components/modal/Modal.tsx";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -166,6 +167,8 @@ function App() {
                     }
                 }}
             />
+
+            <CustomModal/>
         </MasterLayout>
     )
 }
