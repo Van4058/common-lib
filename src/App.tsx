@@ -1,15 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {MasterLayout} from "./layouts/MasterLayout.tsx";
 import {useFeedback} from "./contexts/FeedbackContext.tsx";
-import {Modal, Select} from "antd";
+import {Form, Modal, Select} from "antd";
 import {Navbar} from "./components/menu/Menu.tsx";
 import {CustomModal} from "./components/modal/Modal.tsx";
+import {TestAction} from "./redux/test/TestAction.ts";
 
 function App() {
     const [count, setCount] = useState(0)
     const {message, notification, modal} = useFeedback();
     const [open, setOpen] = useState(false);
 
+    const [form] = Form.useForm();
+
+    const testRef = useRef<{value: any, label: any} | undefined>();
+
+    const {
+        vm,
+        dispatchGetList,
+        dispatchDefaultState
+    } = TestAction();
+
+    useEffect(() => {
+        console.log(vm.items);
+    }, [vm.items]);
 
     // Hoặc dùng react-route có 1 hook để detect event này
 
@@ -48,10 +62,37 @@ function App() {
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }, [vm.items])
 
+    const selectOptions = () => {
+        let options  = vm.items.map(e => ({
+            label: e['name'] ?? e['title'],
+            value: e['id']
+        }))
+
+        let isContains = false;
+
+        for (const option of options) {
+            if (option.value === testRef.current?.value) {
+                isContains = true;
+            }
+        }
+
+        if (!isContains) {
+            options = [
+                {
+                    value: testRef.current?.value,
+                    label: testRef.current?.label,
+                },
+                ...options,
+            ]
+        }
+
+        return options;
+    }
+
     return (
         <MasterLayout>
 
-            <Navbar />
+            <Navbar/>
             {/*<div style={{background: "#000", width: "500px", height: "500px"}} onClick={() => {*/}
             {/*    console.log('parent')}}>*/}
             {/*    <div style={{background: "white", width: "200px", height: "200px"}} onClick={(event) => {*/}
@@ -83,6 +124,51 @@ function App() {
             {/*<p className="read-the-docs">*/}
             {/*    Click on the Vite and React logos to learn more*/}
             {/*</p>*/}
+
+            <div>
+                <div>
+                    <button onClick={dispatchGetList}>
+                        dispatchGetList
+                    </button>
+                </div>
+
+                <div>
+                    <button onClick={dispatchDefaultState}>
+                        dispatchDefaultState
+                    </button>
+                </div>
+
+                <div>
+                    <Form
+                        form={form}
+                    >
+                        <Form.Item
+                            name="select"
+                            label="Select"
+                        >
+                            <Select
+                                options={selectOptions()}
+                                onChange={(value, option) => {
+                                    if (value) {
+                                        testRef.current = {
+                                            label: vm.items.filter(e => e.id === value).pop()['id'],
+                                            value: value
+                                        }
+                                    }
+                                }}
+                            />
+                        </Form.Item>
+                    </Form>
+                </div>
+
+                <div>
+                    <button onClick={() => {
+                        console.log(form.getFieldsValue())
+                    }}>
+                        Get form value
+                    </button>
+                </div>
+            </div>
 
             <Select
                 options={[
@@ -168,7 +254,7 @@ function App() {
                 }}
             />
 
-            <CustomModal/>
+            {/*<CustomModal/>*/}
         </MasterLayout>
     )
 }

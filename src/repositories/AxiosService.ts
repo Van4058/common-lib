@@ -1,4 +1,4 @@
-import axios, {AxiosRequestConfig} from "axios";
+import axios, {type AxiosRequestConfig} from "axios";
 
 export class AxiosService {
     static readonly Config = (): AxiosRequestConfig => {
@@ -41,7 +41,7 @@ export class AxiosService {
     public static get(url: string) {
         return axios.get(url, AxiosService.Config())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 return res;
             });
     }
@@ -49,7 +49,7 @@ export class AxiosService {
     public static post(url: string, data: any) {
         return axios.post(url, data, AxiosService.Config())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 return res;
             });
     }
@@ -57,7 +57,7 @@ export class AxiosService {
     public static put(url: string, data: any) {
         return axios.put(url, data, AxiosService.Config())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 return res;
             });
     }
@@ -65,7 +65,7 @@ export class AxiosService {
     public static patch(url: string, data?: any) {
         return axios.patch(url, data, AxiosService.Config())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 return res;
             });
     }
@@ -73,7 +73,7 @@ export class AxiosService {
     public static delete(url: string) {
         return axios.delete(url, AxiosService.Config())
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 return res;
             });
     }
