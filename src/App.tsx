@@ -5,6 +5,8 @@ import {Form, Modal, Select} from "antd";
 import {Navbar} from "./components/menu/Menu.tsx";
 import {CustomModal} from "./components/modal/Modal.tsx";
 import {TestAction} from "./redux/test/TestAction.ts";
+import {Button} from "./components/button/Button.tsx";
+import {TabAction} from "./redux/tab/TabAction.ts";
 
 function App() {
     const [count, setCount] = useState(0)
@@ -20,6 +22,12 @@ function App() {
         dispatchGetList,
         dispatchDefaultState
     } = TestAction();
+
+    const {
+        vm: vmTab,
+        dispatchAddTab,
+        dispatchDeleteTab
+    } = TabAction();
 
     useEffect(() => {
         console.log(vm.items);
@@ -254,7 +262,26 @@ function App() {
                 }}
             />
 
-            {/*<CustomModal/>*/}
+            <div>
+                Check tab in local storage
+                <Button
+                    onClick={() => {
+                        dispatchAddTab('report', '1');
+                        dispatchAddTab('report', '2');
+                        dispatchAddTab('report', '3');
+                    }}
+                >
+                    Add
+                </Button>
+                <Button
+                    onClick={() => {
+                        dispatchDeleteTab('report', '2');
+                        console.log('yeye')
+                    }}
+                >
+                    Delete
+                </Button>
+            </div>
         </MasterLayout>
     )
 }

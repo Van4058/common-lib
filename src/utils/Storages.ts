@@ -2,6 +2,7 @@ export enum StorageKey {
     TOKEN = "app_token",
     USER = "app_user",
     THEME = "app_theme",
+    TABS = "app_tabs",
 }
 
 export class Storages {
@@ -13,7 +14,7 @@ export class Storages {
         localStorage.removeItem(key);
     }
 
-    static getItem(key: string | StorageKey): string | null {
-        return localStorage.getItem(key);
+    static getItem(key: string | StorageKey): any | null {
+        return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key) ?? '') : null;
     }
 }
